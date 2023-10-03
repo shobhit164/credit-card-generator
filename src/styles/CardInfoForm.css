@@ -39,14 +39,12 @@ form input {
     font-weight: 500;
     letter-spacing: 0.055vw;
     font-family: Inter;
-    /* margin : 2vh 0; */
-
     
 }
 
 form fieldset:nth-child(3) > input {
     width: 32%;
-    margin-right: 10px;
+    margin-right: 0.5208333333333334vw;
 }
 
 form fieldset:nth-child(3) {
@@ -64,7 +62,17 @@ input[type=submit], input[type=button] {
     margin-top: 1.3rem;
 }
 
+input[type=submit]:hover {
+    cursor: pointer;
+}
+
 ::placeholder {
     color: var(--var-placeholder); 
     font-family: Inter;
+}
+
+form p {
+    color: red;
+    font-size: 1rem;
+    margin-top: 0.3rem;
 }

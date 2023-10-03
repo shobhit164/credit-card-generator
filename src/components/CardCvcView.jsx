@@ -7,7 +7,7 @@ function CardCvcView() {
     <div className='back-side'> 
        
         <img src= {CardBackView} alt = "Card back side" />
-        <p className='cvc'>789</p>
+        <p className='cvc'>000</p>
         
      </div>
   )
