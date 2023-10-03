@@ -1,0 +1,22 @@
+.back-side {
+    position: absolute;
+    bottom: 20vh;
+    left: 18vw;
+    filter: drop-shadow(10px 11px 62px rgba(0, 0, 0, 0.19));
+}
+
+.back-side img {
+    height: 25vh;
+    filter: brightness(0.8);
+}
+
+.cvc {
+    color: var(--var-basic-white);
+    font-family: Roboto;
+    font-size: 2vh;
+    font-weight: 700;
+    letter-spacing: 0.3vh;
+    position: absolute;
+    top: 11.2vh;
+    left: 35vh;
+}
