@@ -18,15 +18,15 @@ function CardInfoForm() {
       </fieldset>
 
       <fieldset>
-        <legend>EXP.DATE (MM/YY)</legend>
-        <input type='number' placeholder='MM' min={1} max={99}/>
-        <input type='number' placeholder='YY' min={1} max={99}/>
+        <legend>EXP. DATE (MM/YY)</legend>
+        <input type='number' placeholder='MM' min={1} max={12} />
+        <input type='number' placeholder='YY' min={1} max={99} />
         <p className='error'></p>
       </fieldset>
 
       <fieldset>
         <legend>CVC</legend>
-        <input type='password' placeholder='e.g. 123' minLength={3} maxLength={3}/>
+        <input type='password' placeholder='e.g. 123' minLength={3} maxLength={3} />
         <p className='error'></p>
       </fieldset>
 

@@ -5,7 +5,6 @@ main {
     width: 70%
 }
 
-
 .info-form {
     width: 30vw;
     margin-left: 17vw;
@@ -15,7 +14,7 @@ main {
 
 fieldset {
     border: none;
-    margin : 2vh 0;
+    margin : 1.7vh 0;
     width: 100%
 }
 
@@ -23,8 +22,8 @@ fieldset legend {
     color: var(--var-legend);
     font-family: Roboto;
     font-size: 0.89vw;
-    font-weight: 500;
-    letter-spacing: 0.12vw;
+    font-weight: 550;
+    letter-spacing: 0.05vw;
 }
 
 form input {
@@ -40,6 +39,8 @@ form input {
     font-weight: 500;
     letter-spacing: 0.055vw;
     font-family: Inter;
+    /* margin : 2vh 0; */
+
     
 }
 
@@ -57,10 +58,10 @@ form fieldset:nth-child(4){
     margin-left: -4vw;
 }
 
-
 input[type=submit], input[type=button] {
     background-color: var(--var-button-color);
     color: white;
+    margin-top: 1.3rem;
 }
 
 ::placeholder {
