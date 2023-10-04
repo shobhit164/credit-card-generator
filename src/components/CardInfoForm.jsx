@@ -5,42 +5,73 @@ import "../styles/CardInfoForm.css"
 
 function CardInfoForm() {
   let[ name, setName ] = useState('');
+  let[ errorName, setErrorName] = useState(false);
+
   let[ cardNumber, setCardNumber ] = useState('');
+  let[ errorCardNumber, setErrorCardNumber] = useState(false);
+
   let[ validUpto, setValidUpto ] = useState('');
+
   let[ validMonth, setValidMonth] = useState('');
+
   let[ cvc, setCvc ] = useState('');
-  let[ error, setError ] = useState(false);
+  let[ errorCvc, setErrorCvc ] = useState(false);
+
   let[ isConfirmed, setIsConfirmed ] = useState(false);
+  let[ error, setError ] = useState(false);
   
  const handleSubmit = (e) => {
     e.preventDefault();
     if(name.length === 0 || cardNumber.length !== 19 || validUpto.length === 0 || cvc.length === 0  ){
       setError(true)
     } else {
-      setError(false)
+      // setError(false)
       setIsConfirmed(true)
     }
   };
-
-  const formatCardNumber = (inputValue) => {
-    const cleanedValue = inputValue.replace(/\D/g, '');
-    const formattedValue = cleanedValue.replace(/(\d{4})(?=\d)/g, '$1 ');
-    return formattedValue.substr(0, 19);
-  };
-
-  const handleCardNumberChange = (e) => {
-    const formattedValue = formatCardNumber(e.target.value);
-    setCardNumber(formattedValue);
-  };
-
-  const handleNameChange = (e) => {
+  
+  let handleNameChange = (e) => {
     const cleanedValue = e.target.value.replace(/\d/g, ''); 
     setName(cleanedValue);
+    
+    if (e.target.value.match(/\d/)) {
+      setError(false)
+      setErrorName(true)
+    } else {
+      setErrorName(false)
+    }
+  };
+  
+    let formatCardNumber = (inputValue) => {
+      const cleanedValue = inputValue.replace(/\D/g, '');
+      const formattedValue = cleanedValue.replace(/(\d{4})(?=\d)/g, '$1 ');
+      return formattedValue.substr(0, 19);
+    };
+
+  let handleCardNumberChange = (e) => {
+    const formattedValue = formatCardNumber(e.target.value);
+    setCardNumber(formattedValue);
+
+    if(e.target.value.match(/\D/) ){  
+      setError(false)
+      setErrorCardNumber(true)
+    }else {
+      setErrorCardNumber(false)
+    }
   };
 
-  const handleCvcChange = (e) => {
+
+  let handleCvcChange = (e) => {
     const cleanedValue = e.target.value.replace(/\D/g, '');
     setCvc(cleanedValue);
+
+    if(e.target.value.match(/\D/)){ 
+      setError(false)
+      setErrorCvc(true)
+    }else {
+      setErrorCvc(false)
+    }
+
   };
 
   return (
@@ -50,7 +81,7 @@ function CardInfoForm() {
         <legend>CARDHOLDER NAME</legend>
         <input onChange = {handleNameChange} type= 'text' name='name' placeholder='e.g. Jane Appleseed' autoComplete="current-password" />
         {error && name.length <= 0 ? <p> Cardholder name required! </p> : "" }
-        {error && name !== name.replace(/\d/g, '') ? <p>Only letters are allowed!</p> : ""}
+        {errorName ? <p>Only alphabets are allowed!</p> : ""}
         <p className='error'></p>
       </fieldset>
 
@@ -58,7 +89,7 @@ function CardInfoForm() {
         <legend>CARD NUMBER</legend>
         <input onChange = {handleCardNumberChange} type='text' name='number' placeholder='e.g. 1234 5678 9123 0000' autoComplete= "current-password" maxLength={16}/>
         {error && cardNumber.length <= 0  ? <p> Card number required! </p> : "" }
-        {error && !/^[0-9 ]+$/.test(cardNumber) ? <p>Only numbers are allowed!</p> : ""}
+        {errorCardNumber ? <p>Only numbers are allowed!</p> : ""}
       </fieldset>
 
       <fieldset>
@@ -73,7 +104,7 @@ function CardInfoForm() {
         <legend>CVC</legend>
         <input onChange = {handleCvcChange}  type='password' name='cvc' placeholder='e.g. 123' minLength={3} maxLength={3} autoComplete= "current-password" />
         {error && cvc.length <= 0 ? <p> CVC required!</p> : "" }
-        {error && !/^\d+$/.test(cvc) ? <p>Only numbers are allowed!</p> : ""}
+        {errorCvc ? <p>Only numbers are allowed!</p> : ""}
         <p className='error'></p>
       </fieldset>
 
@@ -81,7 +112,7 @@ function CardInfoForm() {
 
     </form>
 
-    {isConfirmed && ( <CardDetailsView cardNumber={cardNumber} cardHolderName={name} cardValidity={validMonth} cardYear={validUpto} /> )}
+    {isConfirmed && ( <CardDetailsView cardNumber={cardNumber} cardHolderName={name} cardValidity={validMonth} cardYear ={validUpto} /> )}
 
     {isConfirmed && (<CardCvcView cvc = {cvc} />) }
 
