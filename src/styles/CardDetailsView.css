@@ -12,6 +12,10 @@
     height: 25vh;
 }
 
+.front-side p:empty:not(:focus)::before {
+    content : attr(data-placeholder);
+}
+
 .disc-1 {
     width: 4vh;
     height: 4vh;

@@ -10,6 +10,10 @@
     filter: brightness(0.8);
 }
 
+.back-side p:empty:not(:focus)::before {
+    content : attr(data-placeholder);
+}
+
 .cvc {
     color: var(--var-basic-white);
     font-family: Roboto;
