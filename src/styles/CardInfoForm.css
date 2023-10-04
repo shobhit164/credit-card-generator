@@ -1,78 +1,78 @@
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70%
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
 }
 
 .info-form {
-    width: 30vw;
-    margin-left: 17vw;
-    display: flex;
-    flex-wrap: wrap;
+  width: 30vw;
+  margin-left: 17vw;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 fieldset {
-    border: none;
-    margin : 1.7vh 0;
-    width: 100%
+  border: none;
+  margin: 1.7vh 0;
+  width: 100%;
 }
 
 fieldset legend {
-    color: var(--var-legend);
-    font-family: Roboto;
-    font-size: 0.89vw;
-    font-weight: 550;
-    letter-spacing: 0.05vw;
+  color: var(--var-legend);
+  font-family: Roboto;
+  font-size: 0.89vw;
+  font-weight: 550;
+  letter-spacing: 0.05vw;
 }
 
 form input {
-    width: 70%;
-    height: 4.4vh;
-    padding: 0 0.7vw;
-    margin-top: 0.8vh;
-    outline: none;
-    border-radius: 0.6vh;
-    border: 1px solid #BBB9BC;
-    background: transparent;
-    font-size: 1vw;
-    font-weight: 500;
-    letter-spacing: 0.055vw;
-    font-family: Inter;
-    
+  width: 70%;
+  height: 4.4vh;
+  padding: 0 0.7vw;
+  margin-top: 0.8vh;
+  outline: none;
+  border-radius: 0.6vh;
+  border: 1px solid #bbb9bc;
+  background: transparent;
+  font-size: 1vw;
+  font-weight: 500;
+  letter-spacing: 0.055vw;
+  font-family: Inter;
 }
 
 form fieldset:nth-child(3) > input {
-    width: 32%;
-    margin-right: 0.5208333333333334vw;
+  width: 32%;
+  margin-right: 0.5208333333333334vw;
 }
 
 form fieldset:nth-child(3) {
-    width: 50%;
+  width: 50%;
 }
 
-form fieldset:nth-child(4){
-    width: 47%;
-    margin-left: -4vw;
+form fieldset:nth-child(4) {
+  width: 47%;
+  margin-left: -4vw;
 }
 
-input[type=submit], input[type=button] {
-    background-color: var(--var-button-color);
-    color: white;
-    margin-top: 1.3rem;
+input[type="submit"],
+input[type="button"] {
+  background-color: var(--var-button-color);
+  color: white;
+  margin-top: 1.3rem;
 }
 
-input[type=submit]:hover {
-    cursor: pointer;
+input[type="submit"]:hover {
+  cursor: pointer;
 }
 
 ::placeholder {
-    color: var(--var-placeholder); 
-    font-family: Inter;
+  color: var(--var-placeholder);
+  font-family: Inter;
 }
 
 form p {
-    color: red;
-    font-size: 1rem;
-    margin-top: 0.3rem;
+  color: red;
+  font-size: 1rem;
+  margin-top: 0.3rem;
 }

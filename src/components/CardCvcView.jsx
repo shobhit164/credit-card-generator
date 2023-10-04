@@ -7,10 +7,8 @@ function CardCvcView({cvc}) {
   return (
     <div className='back-side'> 
        
-        <img src= {CardBackView} alt = "Card back side" />
-        {cvc ? ( <p className='cvc'>{cvc}</p>  ) : (
-        <p className='cvc' data-placeholder='000'></p>
-        )}
+        <img src= {CardBackView} alt = "Card back side" /> 
+        {cvc ? ( <p className='cvc'>{cvc}</p>  ) : ( <p className='cvc' data-placeholder='000'></p> )}
         
      </div>
   )
