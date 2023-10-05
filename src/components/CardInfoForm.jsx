@@ -14,6 +14,8 @@ function CardInfoForm(props) {
   let [validUpto, setValidUpto] = useState("");
   let [error, setError] = useState(false);
   let [validMonth, setValidMonth] = useState("");
+  let [errorMonth, setErrorMonth] = useState(false);
+
 
   let [cvc, setCvc] = useState("");
   let [errorCvc, setErrorCvc] = useState(false);
@@ -25,17 +27,18 @@ function CardInfoForm(props) {
   let handleSubmit = (e) => {
     e.preventDefault();
 
-    if ( name.length === 0 || cardNumber.length === 0 || validUpto.length === 0 ||  cvc.length === 0) {
+    if ( name.length === 0 || cardNumber.length === 0 || validUpto.length === 0 || validMonth.length === 0 ||  cvc.length === 0) {
       setError(true);
       setError1(true);
       setError2(true);
       setError3(true);
+      setErrorMonth(true);
       
     } else {
       setError(false);
     }
     
-    if ( name.length === 0 || cardNumber.length !== 19 ||  validUpto.length === 0 || cvc.length !== 3 ) {
+    if ( name.length === 0 || cardNumber.length !== 19 || validUpto.length === 0 || validMonth.length === 0 || cvc.length !== 3 || errorName ) {
       return;
     } else {
       setShowToast(true);
@@ -63,7 +66,7 @@ function CardInfoForm(props) {
     if (e.target.value.match(/\d/)) {
       setError1(false);
       setErrorName(true);
-      return
+      
     } else {
       setErrorName(false);
     }
@@ -107,7 +110,7 @@ function CardInfoForm(props) {
           <legend>CARDHOLDER NAME</legend>
           <input onChange={handleNameChange} type="text" name="name" placeholder="e.g. Jane Appleseed" autoComplete="current-password" />
           {error1 && name.length <= 0 ? <p> Cardholder name required! </p> : ""}
-          {errorName ? <p>Only ALPHABETS are allowed!</p> : ""}
+          {errorName ? <p>Only alphabets are allowed!</p> : ""}
         </fieldset>
 
         <fieldset>
@@ -115,7 +118,7 @@ function CardInfoForm(props) {
           <input onChange={handleCardNumberChange} type="text" name="number" placeholder="e.g. 1234 5678 9123 0000" 
            autoComplete="current-password" maxLength={16} />
           {error2 && cardNumber.length <= 0 ? ( <p> Card number required! </p> ) : (" ")}
-          {errorCardNumber ? <p>Only 16 DIGITS are allowed!</p> : " "}
+          {errorCardNumber ? <p>Card number must be numeric!</p> : " "}
         </fieldset>
 
         <fieldset>
@@ -124,7 +127,8 @@ function CardInfoForm(props) {
             min={1} max={12} maxLength={2} />
           <input  className="custom-number-input" onChange={(e) => setValidUpto(e.target.value)} type="number" name="year" placeholder="YY"
             min={1} max={99} maxLength={2} />
-          {error && validUpto.length <= 0 ? <p> Expiry date required!</p> : ""}
+          {errorMonth && validMonth.length <= 0 ? <p> Expiry month required!</p> : ""}
+          {error && validUpto.length <= 0 ? <p> Expiry year required!</p> : ""}
         </fieldset>
 
         <fieldset>
@@ -134,7 +138,7 @@ function CardInfoForm(props) {
           {errorCvc ? <p>Cvc must be numeric!</p> : ""}
         </fieldset>
 
-        <input type="submit" value="Confirm" disabled={errorName} />
+        <input type="submit" value="Confirm"  />
 
       </form>
    
