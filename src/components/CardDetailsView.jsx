@@ -4,7 +4,7 @@ import '../styles/CardDetailsView.css'
 function CardDetailsView({ cardNumber, cardHolderName, month, year }) {
 
   return (
-    <div className='front-side'>
+    <div className='front-side animate__animated animate__rollIn'>
     
       <img src={CardFrontView} alt = "Card front side"/>
       <div className='disc-1'> </div>

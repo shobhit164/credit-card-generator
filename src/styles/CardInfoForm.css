@@ -31,7 +31,6 @@ form input {
   height: 4.4vh;
   padding: 0 0.7vw;
   margin-top: 0.8vh;
-  outline: none;
   border-radius: 0.6vh;
   border: 1px solid #bbb9bc;
   background: transparent;
@@ -64,6 +63,7 @@ input[type="button"] {
 
 input[type="submit"]:hover {
   cursor: pointer;
+  background: green;
 }
 
 ::placeholder {
@@ -73,6 +73,12 @@ input[type="submit"]:hover {
 
 form p {
   color: red;
-  font-size: 1rem;
+  font-size: 1.004vw;
   margin-top: 0.3rem;
+}
+
+@media screen and (max-width: 1278px) {
+  .info-form {
+    margin-left: 32vw;
+  }
 }

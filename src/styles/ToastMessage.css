@@ -1,0 +1,28 @@
+.toast-message {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: #fff;
+  animation: slideIn 0.8s, fadeOut 7s 2s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

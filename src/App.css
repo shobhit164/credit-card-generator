@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Borel&family=Dancing+Script&family=Delius+Unicase:wght@700&family=Inter:wght@700;800&family=Outfit:wght@400;700&family=Poltawski+Nowy:wght@500&family=Roboto:wght@300;400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Borel&family=Dancing+Script&family=Delius+Unicase:wght@700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700&family=Poltawski+Nowy:wght@500&family=Roboto:wght@300;400;500;700&display=swap");
 
+/* code to hide spin button in input field */
 .custom-number-input::-webkit-inner-spin-button,
 .custom-number-input::-webkit-outer-spin-button,
 .custom-number-input::-webkit-clear-button {
@@ -28,3 +28,4 @@ body, html, #root {
   --var-placeholder: #bbb9bc;
   --var-button-color: #220930;
 }
+

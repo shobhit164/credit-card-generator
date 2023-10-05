@@ -24,3 +24,9 @@
   top: 11.2vh;
   left: 35vh;
 }
+
+@media screen and (max-width: 1278px) {
+  .back-side {
+    left: 10vw;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "../styles/CardInfoForm.css";
+import ToastMessage from "./ToastMessage";
 
 function CardInfoForm(props) {
   let [name, setName] = useState("");
@@ -19,23 +20,27 @@ function CardInfoForm(props) {
   let [error3, setError3] = useState(false);
 
   let clearForm = useRef(null);
+  let [showToast, setShowToast] = useState(false);
 
   let handleSubmit = (e) => {
     e.preventDefault();
 
-    if ( name.length === 0 || cardNumber.length !== 19 || validUpto.length === 0 ||  cvc.length === 0) {
+    if ( name.length === 0 || cardNumber.length === 0 || validUpto.length === 0 ||  cvc.length === 0) {
       setError(true);
       setError1(true);
       setError2(true);
       setError3(true);
+      
     } else {
       setError(false);
     }
-
-    if ( name.length === 0 || cardNumber.length === 0 ||  validUpto.length === 0 || cvc.length === 0 ) {
+    
+    if ( name.length === 0 || cardNumber.length !== 19 ||  validUpto.length === 0 || cvc.length !== 3 ) {
       return;
+    } else {
+      setShowToast(true);
     }
-
+    
     let card = { 
       name: name,
       number: cardNumber,
@@ -43,6 +48,7 @@ function CardInfoForm(props) {
       year: validUpto,
       cvc: cvc,
     };
+
     props.cardFunc(card);
 
     if (clearForm.current) {
@@ -51,12 +57,13 @@ function CardInfoForm(props) {
   };
 
   let handleNameChange = (e) => {
-    let cleanedValue = e.target.value.replace(/\d/g, "");
+    let cleanedValue = e.target.value.replace(/\d/g, " ");
     setName(cleanedValue);
 
     if (e.target.value.match(/\d/)) {
       setError1(false);
       setErrorName(true);
+      return
     } else {
       setErrorName(false);
     }
@@ -94,13 +101,13 @@ function CardInfoForm(props) {
 
   return (
     <main>
-      <form ref={clearForm} className="info-form" onSubmit={handleSubmit}>
+    <form ref={clearForm} className = "info-form" onSubmit={handleSubmit}>
 
         <fieldset>
           <legend>CARDHOLDER NAME</legend>
           <input onChange={handleNameChange} type="text" name="name" placeholder="e.g. Jane Appleseed" autoComplete="current-password" />
           {error1 && name.length <= 0 ? <p> Cardholder name required! </p> : ""}
-          {errorName ? <p>Only alphabets are allowed!</p> : ""}
+          {errorName ? <p>Only ALPHABETS are allowed!</p> : ""}
         </fieldset>
 
         <fieldset>
@@ -108,7 +115,7 @@ function CardInfoForm(props) {
           <input onChange={handleCardNumberChange} type="text" name="number" placeholder="e.g. 1234 5678 9123 0000" 
            autoComplete="current-password" maxLength={16} />
           {error2 && cardNumber.length <= 0 ? ( <p> Card number required! </p> ) : (" ")}
-          {errorCardNumber ? <p>Only numbers are allowed!</p> : ""}
+          {errorCardNumber ? <p>Only 16 DIGITS are allowed!</p> : " "}
         </fieldset>
 
         <fieldset>
@@ -127,9 +134,15 @@ function CardInfoForm(props) {
           {errorCvc ? <p>Cvc must be numeric!</p> : ""}
         </fieldset>
 
-        <input type="submit" value="Confirm" />
+        <input type="submit" value="Confirm" disabled={errorName} />
+
       </form>
+   
+        {showToast && <ToastMessage message="Congratulations, your card details are successfully submitted." />}
+
     </main>
   );
 }
 export default CardInfoForm;
+
+

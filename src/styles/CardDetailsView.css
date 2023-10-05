@@ -67,3 +67,9 @@
   font-weight: 500;
   letter-spacing: 0.3vh;
 }
+
+@media screen and (max-width: 1278px) {
+  .front-side {
+    left: 5vw;
+  }
+}
