@@ -3,10 +3,17 @@
   bottom: 30px;
   right: 30px;
   padding: 10px 20px;
+  font-weight: 500;
+  font-size: 1.2rem;
   border-radius: 4px;
-  background-color: #4caf50;
+  background-color: #634caf;
   color: #fff;
   animation: slideIn 0.8s, fadeOut 4s 1.5s forwards;
+  font-family: Roboto;
+}
+
+.approval_img {
+  margin-left: -8vw;
 }
 
 @keyframes slideIn {

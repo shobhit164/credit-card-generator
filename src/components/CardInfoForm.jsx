@@ -24,9 +24,14 @@ function CardInfoForm(props) {
   let clearForm = useRef(null);
   let [showToast, setShowToast] = useState(false);
 
+  let [showConfirmButton, setShowConfirmButton] = useState(true);
+  let [showReSubmitButton, setShowReSubmitButton] = useState(false);
+  let [showFormFields, setShowFormFields] = useState(true);
+
+  
   let handleSubmit = (e) => {
     e.preventDefault();
-
+    
     if ( name.length === 0 || cardNumber.length === 0 || validUpto.length === 0 || validMonth.length === 0 ||  cvc.length === 0 ) {
       setError(true);
       setError1(true);
@@ -37,16 +42,10 @@ function CardInfoForm(props) {
       setError(false);
     }
     
-    // if(cardNumber.length !== 19){
-    //   setErrorCardNumber2(true);
-    // }else {
-    //   setErrorCardNumber2(false);
-    // }
-    
     if ( name.length === 0 || cardNumber.length !== 19 || validUpto.length === 0 || validMonth.length === 0 || cvc.length !== 3 || errorName ) {
       return;
     } 
-
+    
     let card = { 
       name: name,
       number: cardNumber,
@@ -54,23 +53,23 @@ function CardInfoForm(props) {
       year: validUpto,
       cvc: cvc,
     };
-
+    
     props.cardFunc(card);
-
+    
+    setShowConfirmButton(false);
+    setShowFormFields(false);
+    setShowReSubmitButton(true);
+    
     if (clearForm.current) {
       clearForm.current.reset();
     }
     setShowToast(true);
-    
-    setTimeout(() => {
-     setShowToast(false);
-   }, 3000);
   };
-    
+  
   let handleNameChange = (e) => {
     let cleanedValue = e.target.value.replace(/\d/g, " ");
     setName(cleanedValue);
-
+    
     if (e.target.value.match(/\d/)) {
       setError1(false);
       setErrorName(true);
@@ -79,23 +78,23 @@ function CardInfoForm(props) {
       setErrorName(false);
     }
   };
-
+  
   let formatCardNumber = (inputValue) => {
     let cleanedValue = inputValue.replace(/\D/g, "");
     let formattedValue = cleanedValue.replace(/(\d{4})(?=\d)/g, "$1 ");
     return formattedValue.substr(0, 19);
   };
-
+  
   let handleCardNumberChange = (e) => {
     let formattedValue = formatCardNumber(e.target.value);
     setCardNumber(formattedValue);
-
+    
     if (formattedValue.length !== 19 ) {
       setErrorCardNumber2(true);
     } else {
       setErrorCardNumber2(false);
     }
-
+    
     if (e.target.value.match(/\D/)) {
       setError2(false);
       setErrorCardNumber2(false);
@@ -103,13 +102,13 @@ function CardInfoForm(props) {
     } else {
       setErrorCardNumber(false);
     }
-
+    
   };
-
+  
   let handleCvcChange = (e) => {
     let cleanedValue = e.target.value.replace(/\D/g, "");
     setCvc(cleanedValue);
-
+    
     if (e.target.value.match(/\D/)) {
       setError3(false);
       setErrorCvc(true);
@@ -117,11 +116,16 @@ function CardInfoForm(props) {
       setErrorCvc(false);
     }
   };
-
+  
+  let handleReSubmit = () => {
+    window.location.reload();
+  };
+  
   return (
     <main>
       <form ref={clearForm} className = "info-form" onSubmit={handleSubmit}>
-
+      {showFormFields && (
+        <>
         <fieldset>
           <legend>CARDHOLDER NAME</legend>
           <input onChange={handleNameChange} type="text" name="name" placeholder="e.g. Jane Appleseed" autoComplete="current-password" />
@@ -154,8 +158,11 @@ function CardInfoForm(props) {
           {error3 && cvc.length <= 0 ? <p> CVC required!</p> : ""}
           {errorCvc ? <p>Cvc must be numeric!</p> : ""}
         </fieldset>
+        </>
+      )}
+        {showConfirmButton && ( <input type="submit" value="Confirm" /> )}
 
-        <input type="submit" value="Confirm" />
+        {showReSubmitButton && ( <button onClick={handleReSubmit}>Continue</button>)}
 
       </form>
    
@@ -164,6 +171,7 @@ function CardInfoForm(props) {
     </main>
   );
 }
+
 export default CardInfoForm;
 
 

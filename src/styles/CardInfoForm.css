@@ -10,6 +10,7 @@ main {
   margin-left: 17vw;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 fieldset {
@@ -55,15 +56,35 @@ form fieldset:nth-child(4) {
 }
 
 input[type="submit"],
-input[type="button"] {
+input[type="button"],
+button {
   background-color: var(--var-button-color);
   color: white;
   margin-top: 1.3rem;
+  border: none;
+  border-radius: 0.6vh;
+  padding: 0.7vh 1.5vw;
+  font-size: 1vw;
+  font-weight: 500;
+  letter-spacing: 0.055vw;
+  font-family: Inter;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover {
   cursor: pointer;
   background: green;
+}
+
+button {
+  width: 60%;
+  height: 4.4vh;
+  background: green;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #634caf;
 }
 
 ::placeholder {
