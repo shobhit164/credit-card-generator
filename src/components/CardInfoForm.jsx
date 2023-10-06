@@ -9,13 +9,13 @@ function CardInfoForm(props) {
 
   let [cardNumber, setCardNumber] = useState("");
   let [errorCardNumber, setErrorCardNumber] = useState(false);
+  let [errorCardNumber2, setErrorCardNumber2] = useState(false);
   let [error2, setError2] = useState(false);
 
   let [validUpto, setValidUpto] = useState("");
   let [error, setError] = useState(false);
   let [validMonth, setValidMonth] = useState("");
   let [errorMonth, setErrorMonth] = useState(false);
-
 
   let [cvc, setCvc] = useState("");
   let [errorCvc, setErrorCvc] = useState(false);
@@ -27,23 +27,26 @@ function CardInfoForm(props) {
   let handleSubmit = (e) => {
     e.preventDefault();
 
-    if ( name.length === 0 || cardNumber.length === 0 || validUpto.length === 0 || validMonth.length === 0 ||  cvc.length === 0) {
+    if ( name.length === 0 || cardNumber.length === 0 || validUpto.length === 0 || validMonth.length === 0 ||  cvc.length === 0 ) {
       setError(true);
       setError1(true);
       setError2(true);
       setError3(true);
       setErrorMonth(true);
-      
     } else {
       setError(false);
     }
     
+    // if(cardNumber.length !== 19){
+    //   setErrorCardNumber2(true);
+    // }else {
+    //   setErrorCardNumber2(false);
+    // }
+    
     if ( name.length === 0 || cardNumber.length !== 19 || validUpto.length === 0 || validMonth.length === 0 || cvc.length !== 3 || errorName ) {
       return;
-    } else {
-      setShowToast(true);
-    }
-    
+    } 
+
     let card = { 
       name: name,
       number: cardNumber,
@@ -57,8 +60,13 @@ function CardInfoForm(props) {
     if (clearForm.current) {
       clearForm.current.reset();
     }
+    setShowToast(true);
+    
+    setTimeout(() => {
+     setShowToast(false);
+   }, 3000);
   };
-
+    
   let handleNameChange = (e) => {
     let cleanedValue = e.target.value.replace(/\d/g, " ");
     setName(cleanedValue);
@@ -82,12 +90,20 @@ function CardInfoForm(props) {
     let formattedValue = formatCardNumber(e.target.value);
     setCardNumber(formattedValue);
 
+    if (formattedValue.length !== 19 ) {
+      setErrorCardNumber2(true);
+    } else {
+      setErrorCardNumber2(false);
+    }
+
     if (e.target.value.match(/\D/)) {
       setError2(false);
+      setErrorCardNumber2(false);
       setErrorCardNumber(true);
     } else {
       setErrorCardNumber(false);
     }
+
   };
 
   let handleCvcChange = (e) => {
@@ -104,7 +120,7 @@ function CardInfoForm(props) {
 
   return (
     <main>
-    <form ref={clearForm} className = "info-form" onSubmit={handleSubmit}>
+      <form ref={clearForm} className = "info-form" onSubmit={handleSubmit}>
 
         <fieldset>
           <legend>CARDHOLDER NAME</legend>
@@ -119,6 +135,7 @@ function CardInfoForm(props) {
            autoComplete="current-password" maxLength={16} />
           {error2 && cardNumber.length <= 0 ? ( <p> Card number required! </p> ) : (" ")}
           {errorCardNumber ? <p>Card number must be numeric!</p> : " "}
+          {errorCardNumber2 ? <p>Please enter 16 digits!</p> : " "}
         </fieldset>
 
         <fieldset>
@@ -126,7 +143,7 @@ function CardInfoForm(props) {
           <input className="custom-number-input" onChange={(e) => setValidMonth(e.target.value)} type="number" name="month" placeholder="MM"
             min={1} max={12} maxLength={2} />
           <input  className="custom-number-input" onChange={(e) => setValidUpto(e.target.value)} type="number" name="year" placeholder="YY"
-            min={1} max={99} maxLength={2} />
+            min={23} max={99} maxLength={2} />
           {errorMonth && validMonth.length <= 0 ? <p> Expiry month required!</p> : ""}
           {error && validUpto.length <= 0 ? <p> Expiry year required!</p> : ""}
         </fieldset>
@@ -138,11 +155,11 @@ function CardInfoForm(props) {
           {errorCvc ? <p>Cvc must be numeric!</p> : ""}
         </fieldset>
 
-        <input type="submit" value="Confirm"  />
+        <input type="submit" value="Confirm" />
 
       </form>
    
-        {showToast && <ToastMessage message="Congratulations, your card details are successfully submitted." />}
+        {showToast && <ToastMessage message="Congratulations, your card details are successfully submitted" />}
 
     </main>
   );

@@ -6,7 +6,7 @@
   border-radius: 4px;
   background-color: #4caf50;
   color: #fff;
-  animation: slideIn 0.8s, fadeOut 7s 2s forwards;
+  animation: slideIn 0.8s, fadeOut 4s 1.5s forwards;
 }
 
 @keyframes slideIn {
