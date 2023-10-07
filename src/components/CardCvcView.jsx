@@ -4,7 +4,7 @@ import '../styles/CardCvcView.css';
 
 function CardCvcView({ cvc }) {
   return (
-    <div className='back-side  animate__animated animate__rollIn' > 
+    <div className='back-side  animate__animated animate__backInUp' > 
        
         <img src= {CardBackView} alt = "Card back side" /> 
         {cvc ? ( <p className='cvc'>{cvc}</p>  ) : ( <p className='cvc' data-placeholder='000'></p> )}
