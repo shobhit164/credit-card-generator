@@ -1,6 +1,6 @@
-import React from 'react'
-import CardFrontView from '../resources/CardFrontView.png'
-import '../styles/CardDetailsView.css'
+import React from 'react';
+import CardFrontView from '../resources/CardFrontView.png';
+import '../styles/CardDetailsView.css';
 function CardDetailsView({ cardNumber, cardHolderName, month, year }) {
 
   return (

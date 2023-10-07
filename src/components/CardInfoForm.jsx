@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import "../styles/CardInfoForm.css";
 import ToastMessage from "./ToastMessage";
+import "../styles/CardInfoForm.css";
 
 function CardInfoForm(props) {
   let [name, setName] = useState("");
@@ -53,7 +53,7 @@ function CardInfoForm(props) {
       year: validUpto,
       cvc: cvc,
     };
-    
+
     props.cardFunc(card);
     
     setShowConfirmButton(false);
@@ -118,7 +118,31 @@ function CardInfoForm(props) {
   };
   
   let handleReSubmit = () => {
-    window.location.reload();
+    props.cardFunc({ name: "", number: "", month: "", year: "", cvc: "" });
+
+    setName("");
+    setErrorName(false);
+    setError1(false);
+
+    setCardNumber("");
+    setErrorCardNumber(false);
+    setErrorCardNumber2(false);
+    setError2(false);
+
+    setValidUpto("");
+    setError(false);
+
+    setValidMonth("");
+    setErrorMonth(false);
+
+    setCvc("");
+    setErrorCvc(false);
+    setError3(false);
+  
+    setShowConfirmButton(true);
+    setShowFormFields(true);
+    setShowReSubmitButton(false);
+    setShowToast(false);
   };
   
   return (
